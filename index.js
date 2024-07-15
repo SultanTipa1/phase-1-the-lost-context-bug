@@ -1,12 +1,76 @@
+
+
+
+
+const printCard = function () {
+  console.log(this.frontContent);
+  console.log(this.insideContent);
+
+  this.signatories.forEach(function (signatory) {
+    const message = `${this.closing[signatory]}, ${signatory}`;
+    console.log(message);
+  }, this);
+};
+
+const printCard = function () {
+  console.log(this.frontContent);
+  console.log(this.insideContent);
+  const contextBoundForEachExpr = function (signatory) {
+    const message = `${this.closing[signatory]}, ${signatory}`;
+    console.log(message);
+  }.bind(this);
+
+  this.signatories.forEach(contextBoundForEachExpr);
+};
+
+printCard.call(messageConfig);
+
 const messageConfig = {
   frontContent: "Happy Birthday, Odin One-Eye!",
-  insideContent: "From Asgard to Nifelheim, you're the best all-father ever.\n\nLove,",
+  insideContent:
+    "From Asgard to Nifelheim, you're the best all-father ever.\n\nLove,",
   closing: {
-      "Thor": "Admiration, respect, and love",
-      "Loki": "Your son"
+    Thor: "Admiration, respect, and love",
+    Loki: "Your son",
   },
-  signatories: [
-      "Thor",
-      "Loki"
-  ]
+  signatories: ["Thor", "Loki"],
 };
+
+const printCard = function () {
+  console.log(this.frontContent);
+  console.log(this.insideContent);
+
+  this.signatories.forEach(function (signatory) {
+    const message = `${this.closing[signatory]}, ${signatory}`;
+    console.log(message);
+  });
+};
+
+printCard.call(messageConfig);
+
+const greeter = (nameToGreet) => {
+  const message = `Good morning ${nameToGreet}`;
+  console.log(message);
+  return "Greeted: " + nameToGreet;
+};
+const result = greeter("Max"); //=> "Greeted: Max"
+
+const greeter = function (nameToGreet) {
+  const message = `Good morning ${nameToGreet}`;
+  console.log(message);
+  return "Greeted: " + nameToGreet;
+}.bind(this);
+const result = greeter("Max Again"); //=> "Greeted: Max Again"
+
+
+const printCard = function () {
+  console.log(this.frontContent);
+  console.log(this.insideContent);
+  // Wow! Elegant! And notice the arrow function's `this` is the same `this`
+  // that printCard has; specifically, the `thisArg` that was passed to it
+  this.signatories.forEach((signatory) =>
+    console.log(`${this.closing[signatory]}, ${signatory}`)
+  );
+};
+
+printCard.call(messageConfig);

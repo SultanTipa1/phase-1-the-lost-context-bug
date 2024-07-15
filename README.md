@@ -217,19 +217,7 @@ value to a variable and leverage function-level scope and _closures_ to regain
 access to the outer context.
 
 ```js
-const printCard = function () {
-  console.log(this.frontContent);
-  console.log(this.insideContent);
-
-  const outerContext = this;
-
-  this.signatories.forEach(function (signatory) {
-    const message = `${outerContext.closing[signatory]}, ${signatory}`;
-    console.log(message);
-  });
-};
-
-printCard.call(messageConfig);
+call(messageConfig);
 /*
 Happy Birthday, Odin One-Eye!
 From Asgard to Nifelheim, you're the best all-father ever.
